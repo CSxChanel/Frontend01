@@ -29,7 +29,7 @@ export function setupLoginForm() {
             form.reset();
             // redirect ke dashboard
             setTimeout(() => {
-                window.location.href = "../pages/dashboard.html";
+                window.location.href = "/pages/dashboard.html";
             }, 1000);
         } else {
             alert(res.message || "Login gagal.");
