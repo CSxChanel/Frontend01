@@ -1,0 +1,716 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>TechSpace Admin</title>
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+        />
+
+        <!--Style tailwindcss-->
+        <link rel="stylesheet" href="../css/output.css" />
+
+        <style>
+            .animate-glow {
+                animation: glow 2s ease-in-out infinite alternate;
+            }
+            @keyframes glow {
+                from {
+                    text-shadow: 0 0 5px #00f0ff;
+                }
+                to {
+                    text-shadow: 0 0 20px #00f0ff;
+                }
+            }
+            /* Cyberpunk Grid Background */
+            .cyber-bg {
+                background-color: #0a0a1a;
+                background-image: linear-gradient(#0a0a1a 1px, transparent 1px),
+                    linear-gradient(90deg, #0a0a1a 1px, transparent 1px);
+                background-size: 20px 20px;
+            }
+            .dark .cyber-bg {
+                background-color: #050510;
+                background-image: linear-gradient(
+                        rgba(0, 240, 255, 0.1) 1px,
+                        transparent 1px
+                    ),
+                    linear-gradient(
+                        90deg,
+                        rgba(0, 240, 255, 0.1) 1px,
+                        transparent 1px
+                    );
+            }
+
+            /* Neon Border Effect */
+            .neon-border {
+                position: relative;
+            }
+            .neon-border::after {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                border: 1px solid transparent;
+                border-radius: inherit;
+                background: linear-gradient(45deg, #00f0ff, #ff2a6d, #00f0ff)
+                    border-box;
+                -webkit-mask:
+                    linear-gradient(#fff 0 0) padding-box,
+                    linear-gradient(#fff 0 0);
+                -webkit-mask-composite: destination-out;
+                mask-composite: exclude;
+                pointer-events: none;
+            }
+
+            /* Particle Dots Animation */
+            @keyframes particle-move {
+                0% {
+                    transform: translateY(0) translateX(0);
+                    opacity: 1;
+                }
+                100% {
+                    transform: translateY(-100px) translateX(20px);
+                    opacity: 0;
+                }
+            }
+            .particle-dots::before {
+                content: "";
+                position: absolute;
+                width: 2px;
+                height: 2px;
+                background: #00f0ff;
+                border-radius: 50%;
+                animation: particle-move 3s linear infinite;
+            }
+            /* Mobile Sidebar */
+            @media (max-width: 768px) {
+                .sidebar {
+                    position: fixed;
+                    transform: translateX(-100%);
+                    transition: transform 0.3s ease-out;
+                    z-index: 50;
+                }
+                .sidebar-open {
+                    transform: translateX(0);
+                }
+                .sidebar-overlay {
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    right: 0;
+                    bottom: 0;
+                    background: rgba(0, 0, 0, 0.7);
+                    z-index: 40;
+                    opacity: 0;
+                    pointer-events: none;
+                    transition: opacity 0.3s ease;
+                }
+                .sidebar-overlay-open {
+                    opacity: 1;
+                    pointer-events: auto;
+                }
+            }
+        </style>
+    </head>
+    <body
+        class="bg-white dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-all duration-500 cyber-bg"
+    >
+        <!-- Mobile Sidebar Overlay -->
+        <div id="sidebar-overlay" class="sidebar-overlay md:hidden"></div>
+        <div class="flex h-screen overflow-hidden">
+            <!-- ===== Futuristic Sidebar ===== -->
+            <div
+                id="sidebar"
+                class="sidebar w-64 bg-gray-900 border-r border-cyan-900/30 flex-shrink-0 z-10"
+            >
+                <div class="flex flex-col h-full">
+                    <!-- Logo with Glow Effect -->
+                    <div class="p-4 border-b border-cyan-900/30">
+                        <div class="flex items-center space-x-2">
+                            <i
+                                class="fas fa-robot text-2xl text-cyan-400 animate__animated animate__pulse animate__infinite"
+                            ></i>
+                            <span
+                                class="text-xl font-bold text-cyan-400 animate-glow"
+                                >TECHSPACE</span
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Main Menu -->
+                    <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+                        <a
+                            href="#"
+                            class="flex items-center p-3 rounded-lg bg-cyan-900/20 text-cyan-400 group transition-all duration-300 hover:bg-cyan-900/40 hover:shadow-lg hover:shadow-cyan-500/10"
+                        >
+                            <i
+                                class="fas fa-chart-network mr-3 text-lg group-hover:scale-110 transition-transform"
+                            ></i>
+                            <span>Dashboard</span>
+                            <div
+                                class="ml-auto w-2 h-2 bg-cyan-400 rounded-full animate-pulse"
+                            ></div>
+                        </a>
+
+                        <a
+                            href="#"
+                            class="flex items-center p-3 rounded-lg text-gray-400 hover:text-cyan-300 hover:bg-gray-800/50 group transition-all duration-300"
+                        >
+                            <i
+                                class="fas fa-microchip mr-3 text-lg group-hover:scale-110 transition-transform"
+                            ></i>
+                            <span>Devices</span>
+                        </a>
+
+                        <a
+                            href="#"
+                            class="flex items-center p-3 rounded-lg text-gray-400 hover:text-purple-300 hover:bg-gray-800/50 group transition-all duration-300"
+                        >
+                            <i
+                                class="fas fa-cloud-upload mr-3 text-lg group-hover:scale-110 transition-transform"
+                            ></i>
+                            <span>Cloud Sync</span>
+                        </a>
+
+                        <a
+                            href="#"
+                            class="flex items-center p-3 rounded-lg text-gray-400 hover:text-pink-300 hover:bg-gray-800/50 group transition-all duration-300"
+                        >
+                            <i
+                                class="fas fa-shield-halved mr-3 text-lg group-hover:scale-110 transition-transform"
+                            ></i>
+                            <span>Security</span>
+                        </a>
+
+                        <div class="pt-4">
+                            <p class="text-xs uppercase text-gray-500 mb-2">
+                                Analytics
+                            </p>
+                            <a
+                                href="#"
+                                class="flex items-center p-3 rounded-lg text-gray-400 hover:text-yellow-300 hover:bg-gray-800/50 group transition-all duration-300"
+                            >
+                                <i
+                                    class="fas fa-chart-pie mr-3 text-lg group-hover:scale-110 transition-transform"
+                                ></i>
+                                <span>Reports</span>
+                            </a>
+                        </div>
+                    </nav>
+
+                    <!-- User Profile -->
+                    <div class="p-4 border-t border-cyan-900/30">
+                        <div class="flex items-center">
+                            <div class="relative">
+                                <img
+                                    src="https://randomuser.me/api/portraits/lego/5.jpg"
+                                    class="w-10 h-10 rounded-full border-2 border-cyan-400"
+                                />
+                                <span
+                                    class="absolute bottom-0 right-0 w-3 h-3 bg-green-500 rounded-full border-2 border-gray-900"
+                                ></span>
+                            </div>
+                            <div class="ml-3">
+                                <p class="text-sm font-medium text-cyan-100">
+                                    Admin
+                                </p>
+                                <p class="text-xs text-gray-500">
+                                    root@techspace.io
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== Main Content ===== -->
+            <div class="flex-1 flex flex-col overflow-hidden">
+                <!-- Top Bar -->
+                <header
+                    class="flex items-center justify-between h-16 px-4 bg-white/80 dark:bg-gray-900/50 backdrop-blur-md border-b border-gray-200 dark:border-gray-800"
+                >
+                    <!-- Mobile Menu Button -->
+                    <button
+                        id="mobile-menu-button"
+                        class="md:hidden p-2 rounded-md text-gray-500 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    >
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    <div class="flex items-center mx-2">
+                        <h1
+                            class="text-xl font-bold text-gray-800 dark:text-cyan-200"
+                        >
+                            <span class="animate__animated animate__fadeIn"
+                                >System Dashboard</span
+                            >
+                        </h1>
+                    </div>
+                    <!-- Animated Search Bar -->
+                    <div class="flex-1 max-w-md mx-4">
+                        <div class="relative">
+                            <div
+                                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                            >
+                                <i class="fas fa-search text-gray-400"></i>
+                            </div>
+                            <input
+                                class="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors duration-200"
+                                placeholder="Search..."
+                            />
+                        </div>
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <!-- Dark Mode Toggle -->
+                        <button
+                            id="theme-toggle"
+                            class="p-2 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-cyan-300 hover:bg-gray-300 dark:hover:bg-gray-700 transition-all duration-300 transform hover:scale-110"
+                        >
+                            <i class="fas fa-moon dark:hidden"></i>
+                            <i class="fas fa-sun hidden dark:inline"></i>
+                        </button>
+
+                        <!-- Notification with Bubble -->
+                        <button
+                            class="p-2 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-700 relative transition-all duration-300"
+                        >
+                            <i class="fas fa-bell"></i>
+                            <span
+                                class="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full animate-ping"
+                            ></span>
+                        </button>
+                    </div>
+                </header>
+
+                <!-- Main Content -->
+                <main class="flex-1 overflow-y-auto p-4  transition-colors duration-300">
+                    <!-- Stats Cards with Hover Effects -->
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8"
+                    >
+                        <!-- Card 1 -->
+                        <div
+                            class="bg-gradient-to-br from-cyan-900 to-gray-900 rounded-xl p-6 text-white neon-border relative overflow-hidden card-hover transition-all duration-500 hover:shadow-xl hover:shadow-cyan-500/20"
+                        >
+                            <div
+                                class="absolute -right-6 -top-6 w-24 h-24 bg-cyan-500/10 rounded-full"
+                            ></div>
+                            <div class="relative z-10">
+                                <p class="text-sm text-cyan-300 mb-1">
+                                    CPU Usage
+                                </p>
+                                <h3 class="text-3xl font-bold mb-2">78.5%</h3>
+                                <div
+                                    class="w-full bg-gray-800 rounded-full h-2"
+                                >
+                                    <div
+                                        class="bg-cyan-400 h-2 rounded-full"
+                                        style="width: 78.5%"
+                                    ></div>
+                                </div>
+                                <p class="text-xs text-cyan-300 mt-2">
+                                    +2.3% from yesterday
+                                </p>
+                            </div>
+                            <i
+                                class="fas fa-microchip absolute bottom-4 right-4 text-4xl opacity-20"
+                            ></i>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div
+                            class="bg-gradient-to-br from-purple-900 to-gray-900 rounded-xl p-6 text-white neon-border relative overflow-hidden card-hover transition-all duration-500 hover:shadow-xl hover:shadow-purple-500/20"
+                        >
+                            <div
+                                class="absolute -right-6 -top-6 w-24 h-24 bg-purple-500/10 rounded-full"
+                            ></div>
+                            <div class="relative z-10">
+                                <p class="text-sm text-purple-300 mb-1">
+                                    Memory
+                                </p>
+                                <h3 class="text-3xl font-bold mb-2">64%</h3>
+                                <div
+                                    class="w-full bg-gray-800 rounded-full h-2"
+                                >
+                                    <div
+                                        class="bg-purple-400 h-2 rounded-full"
+                                        style="width: 64%"
+                                    ></div>
+                                </div>
+                                <p class="text-xs text-purple-300 mt-2">
+                                    12.8GB/20GB used
+                                </p>
+                            </div>
+                            <i
+                                class="fas fa-memory absolute bottom-4 right-4 text-4xl opacity-20"
+                            ></i>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div
+                            class="bg-gradient-to-br from-pink-900 to-gray-900 rounded-xl p-6 text-white neon-border relative overflow-hidden card-hover transition-all duration-500 hover:shadow-xl hover:shadow-pink-500/20"
+                        >
+                            <div
+                                class="absolute -right-6 -top-6 w-24 h-24 bg-pink-500/10 rounded-full"
+                            ></div>
+                            <div class="relative z-10">
+                                <p class="text-sm text-pink-300 mb-1">
+                                    Network
+                                </p>
+                                <h3 class="text-3xl font-bold mb-2">
+                                    1.2 Gbps
+                                </h3>
+                                <div class="flex space-x-2">
+                                    <div class="flex-1">
+                                        <p class="text-xs">Upload</p>
+                                        <div
+                                            class="w-full bg-gray-800 rounded-full h-2 mt-1"
+                                        >
+                                            <div
+                                                class="bg-pink-400 h-2 rounded-full"
+                                                style="width: 45%"
+                                            ></div>
+                                        </div>
+                                    </div>
+                                    <div class="flex-1">
+                                        <p class="text-xs">Download</p>
+                                        <div
+                                            class="w-full bg-gray-800 rounded-full h-2 mt-1"
+                                        >
+                                            <div
+                                                class="bg-pink-400 h-2 rounded-full"
+                                                style="width: 75%"
+                                            ></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <i
+                                class="fas fa-network-wired absolute bottom-4 right-4 text-4xl opacity-20"
+                            ></i>
+                        </div>
+
+                        <!-- Card 4 -->
+                        <div
+                            class="bg-gradient-to-br from-yellow-900 to-gray-900 rounded-xl p-6 text-white neon-border relative overflow-hidden card-hover transition-all duration-500 hover:shadow-xl hover:shadow-yellow-500/20"
+                        >
+                            <div
+                                class="absolute -right-6 -top-6 w-24 h-24 bg-yellow-500/10 rounded-full"
+                            ></div>
+                            <div class="relative z-10">
+                                <p class="text-sm text-yellow-300 mb-1">
+                                    Storage
+                                </p>
+                                <h3 class="text-3xl font-bold mb-2">82%</h3>
+                                <div
+                                    class="w-full bg-gray-800 rounded-full h-2"
+                                >
+                                    <div
+                                        class="bg-yellow-400 h-2 rounded-full"
+                                        style="width: 82%"
+                                    ></div>
+                                </div>
+                                <p class="text-xs text-yellow-300 mt-2">
+                                    1.64TB/2TB used
+                                </p>
+                            </div>
+                            <i
+                                class="fas fa-database absolute bottom-4 right-4 text-4xl opacity-20"
+                            ></i>
+                        </div>
+                    </div>
+
+                    <!-- Charts Section -->
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+                        <!-- Main Chart -->
+                        <div
+                            class="lg:col-span-2 bg-white/5 dark:bg-gray-900/50 backdrop-blur-md rounded-xl p-6 border border-gray-200/10 neon-border"
+                        >
+                            <div class="flex justify-between items-center mb-6">
+                                <h2
+                                    class="text-lg font-semibold text-gray-800 dark:text-cyan-200"
+                                >
+                                    Network Activity
+                                </h2>
+                                <div class="flex space-x-2">
+                                    <button
+                                        class="px-3 py-1 text-xs bg-cyan-500/20 text-cyan-400 rounded-full"
+                                    >
+                                        Live
+                                    </button>
+                                    <button
+                                        class="px-3 py-1 text-xs bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full"
+                                    >
+                                        24h
+                                    </button>
+                                    <button
+                                        class="px-3 py-1 text-xs bg-gray-200 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full"
+                                    >
+                                        7d
+                                    </button>
+                                </div>
+                            </div>
+                            <!-- Chart Placeholder (Replace with real chart lib) -->
+                            <div
+                                class="h-64 bg-gradient-to-b from-gray-900/50 to-cyan-900/20 rounded-lg flex items-center justify-center relative overflow-hidden"
+                            >
+                                <!-- Animated grid lines -->
+                                <div
+                                    class="absolute inset-0 opacity-20"
+                                    style="
+                                        background-image: linear-gradient(
+                                                #00f0ff 1px,
+                                                transparent 1px
+                                            ),
+                                            linear-gradient(
+                                                90deg,
+                                                #00f0ff 1px,
+                                                transparent 1px
+                                            );
+                                        background-size: 20px 20px;
+                                    "
+                                ></div>
+                                <!-- Floating particles -->
+                                <div
+                                    class="particle-dots absolute top-1/2 left-1/4"
+                                    style="animation-delay: 0s"
+                                ></div>
+                                <div
+                                    class="particle-dots absolute top-1/3 left-1/2"
+                                    style="animation-delay: 0.5s"
+                                ></div>
+                                <div
+                                    class="particle-dots absolute top-2/3 left-3/4"
+                                    style="animation-delay: 1s"
+                                ></div>
+                                <p
+                                    class="text-gray-500 dark:text-gray-400 z-10"
+                                >
+                                    Real-time Network Chart
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Server Status -->
+                        <div
+                            class="bg-white/5 dark:bg-gray-900/50 backdrop-blur-md rounded-xl p-6 border border-gray-200/10 neon-border"
+                        >
+                            <h2
+                                class="text-lg font-semibold text-gray-800 dark:text-cyan-200 mb-6"
+                            >
+                                Server Nodes
+                            </h2>
+                            <div class="space-y-4">
+                                <div
+                                    class="flex items-center p-3 bg-gray-100/5 dark:bg-gray-800/50 rounded-lg"
+                                >
+                                    <div
+                                        class="w-3 h-3 bg-green-500 rounded-full mr-3 animate-pulse"
+                                    ></div>
+                                    <div class="flex-1">
+                                        <p class="font-medium">US-West-1</p>
+                                        <p
+                                            class="text-xs text-gray-500 dark:text-gray-400"
+                                        >
+                                            San Francisco
+                                        </p>
+                                    </div>
+                                    <span class="text-sm font-mono">42ms</span>
+                                </div>
+                                <div
+                                    class="flex items-center p-3 bg-gray-100/5 dark:bg-gray-800/50 rounded-lg"
+                                >
+                                    <div
+                                        class="w-3 h-3 bg-green-500 rounded-full mr-3 animate-pulse"
+                                    ></div>
+                                    <div class="flex-1">
+                                        <p class="font-medium">EU-Central-1</p>
+                                        <p
+                                            class="text-xs text-gray-500 dark:text-gray-400"
+                                        >
+                                            Frankfurt
+                                        </p>
+                                    </div>
+                                    <span class="text-sm font-mono">87ms</span>
+                                </div>
+                                <div
+                                    class="flex items-center p-3 bg-gray-100/5 dark:bg-gray-800/50 rounded-lg"
+                                >
+                                    <div
+                                        class="w-3 h-3 bg-yellow-500 rounded-full mr-3 animate-pulse"
+                                    ></div>
+                                    <div class="flex-1">
+                                        <p class="font-medium">AP-South-1</p>
+                                        <p
+                                            class="text-xs text-gray-500 dark:text-gray-400"
+                                        >
+                                            Singapore
+                                        </p>
+                                    </div>
+                                    <span class="text-sm font-mono">142ms</span>
+                                </div>
+                                <div
+                                    class="flex items-center p-3 bg-gray-100/5 dark:bg-gray-800/50 rounded-lg"
+                                >
+                                    <div
+                                        class="w-3 h-3 bg-red-500 rounded-full mr-3 animate-pulse"
+                                    ></div>
+                                    <div class="flex-1">
+                                        <p class="font-medium">SA-East-1</p>
+                                        <p
+                                            class="text-xs text-gray-500 dark:text-gray-400"
+                                        >
+                                            São Paulo
+                                        </p>
+                                    </div>
+                                    <span class="text-sm font-mono"
+                                        >Offline</span
+                                    >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Alerts -->
+                    <div
+                        class="bg-white/5 dark:bg-gray-900/50 backdrop-blur-md rounded-xl p-6 border border-gray-200/10 neon-border mb-8"
+                    >
+                        <div class="flex justify-between items-center mb-6">
+                            <h2
+                                class="text-lg font-semibold text-gray-800 dark:text-cyan-200"
+                            >
+                                Security Alerts
+                            </h2>
+                            <button
+                                class="text-sm text-cyan-400 hover:text-cyan-300"
+                            >
+                                View All
+                            </button>
+                        </div>
+                        <div class="space-y-4">
+                            <div
+                                class="flex items-start p-3 bg-gradient-to-r from-red-900/30 to-transparent rounded-lg border-l-4 border-red-500"
+                            >
+                                <i
+                                    class="fas fa-exclamation-triangle text-red-400 mt-1 mr-3"
+                                ></i>
+                                <div>
+                                    <p class="font-medium">
+                                        Unauthorized access attempt
+                                    </p>
+                                    <p
+                                        class="text-sm text-gray-500 dark:text-gray-400"
+                                    >
+                                        From IP: 192.168.1.45 at 14:32:45 UTC
+                                    </p>
+                                </div>
+                            </div>
+                            <div
+                                class="flex items-start p-3 bg-gradient-to-r from-yellow-900/30 to-transparent rounded-lg border-l-4 border-yellow-500"
+                            >
+                                <i
+                                    class="fas fa-shield-exclamation text-yellow-400 mt-1 mr-3"
+                                ></i>
+                                <div>
+                                    <p class="font-medium">
+                                        Firewall rule modified
+                                    </p>
+                                    <p
+                                        class="text-sm text-gray-500 dark:text-gray-400"
+                                    >
+                                        By user: admin@techspace.io
+                                    </p>
+                                </div>
+                            </div>
+                            <div
+                                class="flex items-start p-3 bg-gradient-to-r from-cyan-900/30 to-transparent rounded-lg border-l-4 border-cyan-500"
+                            >
+                                <i
+                                    class="fas fa-rotate text-cyan-400 mt-1 mr-3"
+                                ></i>
+                                <div>
+                                    <p class="font-medium">
+                                        System update available
+                                    </p>
+                                    <p
+                                        class="text-sm text-gray-500 dark:text-gray-400"
+                                    >
+                                        v2.4.1 → v2.5.0
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <script>
+            // Mobile Sidebar Toggle
+            const mobileMenuButton =
+                document.getElementById("mobile-menu-button");
+            const sidebar = document.getElementById("sidebar");
+            const sidebarOverlay = document.getElementById("sidebar-overlay");
+
+            mobileMenuButton.addEventListener("click", () => {
+                sidebar.classList.toggle("sidebar-open");
+                sidebarOverlay.classList.toggle("sidebar-overlay-open");
+            });
+
+            sidebarOverlay.addEventListener("click", () => {
+                sidebar.classList.remove("sidebar-open");
+                sidebarOverlay.classList.remove("sidebar-overlay-open");
+            });
+
+            // Dark Mode Toggle
+            const themeToggle = document.getElementById("theme-toggle");
+            const html = document.documentElement;
+
+            themeToggle.addEventListener("click", () => {
+                html.classList.toggle("dark");
+                localStorage.setItem(
+                    "theme",
+                    html.classList.contains("dark") ? "dark" : "light"
+                );
+            });
+
+            // Check for saved theme preference
+            if (
+                localStorage.getItem("theme") === "dark" ||
+                (!localStorage.getItem("theme") &&
+                    window.matchMedia("(prefers-color-scheme: dark)").matches)
+            ) {
+                html.classList.add("dark");
+            }
+
+            // Particle effects
+            function createParticles() {
+                const container = document.querySelector(".particle-dots");
+                if (!container) return;
+
+                for (let i = 0; i < 10; i++) {
+                    const particle = document.createElement("div");
+                    particle.className = "particle-dots";
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                    particle.style.animationDelay = `${Math.random() * 3}s`;
+                    container.appendChild(particle);
+                }
+            }
+
+            // Initialize
+            document.addEventListener("DOMContentLoaded", () => {
+                createParticles();
+            });
+        </script>
+    </body>
+</html>

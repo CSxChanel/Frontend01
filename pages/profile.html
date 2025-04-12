@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Profil Pengguna</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center p-4">
+  <div class="bg-white shadow-xl rounded-2xl p-8 max-w-md w-full">
+    <h1 class="text-2xl font-bold text-pink-600 mb-6 text-center">Profil Pengguna 💕</h1>
+    
+    <div class="space-y-4 text-gray-700">
+      <div>
+        <p class="font-semibold">👤 Username:</p>
+        <p id="username"></p>
+      </div>
+      <div>
+        <p class="font-semibold">📧 Email:</p>
+        <p id="email"></p>
+      </div>
+      <div>
+        <p class="font-semibold">📱 Perangkat:</p>
+        <p id="device"></p>
+      </div>
+      <div>
+        <p class="font-semibold">🌐 Browser:</p>
+        <p id="browser"></p>
+      </div>
+      <div>
+        <p class="font-semibold">💻 Sistem Operasi:</p>
+        <p id="os"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    async function getProfile() {
+      const res = await fetch("http://localhost:3000/profile", {
+        headers: {
+          Authorization: "Bearer YOUR_JWT_TOKEN"
+        }
+      });
+      const result = await res.json();
+      const data = result.data;
+
+      document.getElementById("username").textContent = data.username;
+      document.getElementById("email").textContent = data.email;
+      document.getElementById("device").textContent = `${data.deviceInfo.device.vendor || ''} ${data.deviceInfo.device.model || ''} (${data.deviceInfo.device.type || ''})`;
+      document.getElementById("browser").textContent = `${data.deviceInfo.browser.name} ${data.deviceInfo.browser.version}`;
+      document.getElementById("os").textContent = `${data.deviceInfo.os.name} ${data.deviceInfo.os.version}`;
+    }
+
+    getProfile();
+  </script>
+</body>
+</html>

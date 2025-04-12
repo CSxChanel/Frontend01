@@ -1,0 +1,210 @@
+<!-- Sidebar -->
+<aside
+    class="sidebar h-screen bg-slate-200 dark:bg-gray-800 shadow-lg border-r border-gray-200 dark:border-gray-700"
+>
+    <div class="flex flex-col">
+        <!-- Logo -->
+        <div
+            class="flex items-center justify-between h-16 px-5 border-b border-gray-200 dark:border-gray-700"
+        >
+            <div class="flex items-cente space-x-6">
+                <i
+                    class="fas fa-rocket text-2xl text-primary-600 dark:text-primary-400 animate-float"
+                ></i>
+                <span
+                    class="text-xl font-bold text-cyan-400 animate-glow dark:text-gray-200"
+                    >cPhone-C7</span
+                >
+            </div>
+        </div>
+
+        <!-- Menu -->
+        <div class="flex-1 overflow-y-auto py-4 px-2">
+            <nav class="space-y-1">
+                <a
+                    data-page="dashboard"
+                    href="#"
+                    class="sidebar-item flex items-center py-3 px-3 rounded-lg group hover:bg-gray-100 dark:hover:bg-gray-700"
+                >
+                    <i
+                        class="sidebar-icon fas fa-tachometer-alt mr-6 text-lg text-gray-500 dark:text-gray-400"
+                    ></i>
+                    <span>Dashboard</span>
+                </a>
+
+                <div class="sidebar-menu-group">
+                    <div
+                        class="sidebar-item flex items-center justify-between px-3 py-3 rounded-lg cursor-pointer group hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
+                    >
+                        <div class="flex items-center">
+                            <i
+                                class="sidebar-icon fas fa-users mr-6 text-lg text-gray-500 dark:text-gray-400 group-hover:text-primary-600 transition-transform duration-200"
+                            ></i>
+                            <span>Users</span>
+                        </div>
+                        <i
+                            class="fas fa-chevron-down text-xs text-gray-400 transition-transform duration-200"
+                        ></i>
+                    </div>
+                    <div class="sidebar-submenu pl-12">
+                        <a
+                            data-page="user-all"
+                            href="#"
+                            class="block py-2 px-4 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300"
+                            >All Users</a
+                        >
+                        <a
+                            data-page="user-add"
+                            href="#"
+                            class="block py-2 px-4 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300"
+                            >Add New</a
+                        >
+                        <a
+                            data-page="user-role"
+                            href="#"
+                            class="block py-2 px-4 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300"
+                            >Roles</a
+                        >
+                    </div>
+                </div>
+
+                <div class="sidebar-menu-group">
+                    <div
+                        class="sidebar-item flex items-center justify-between px-3 py-3 rounded-lg cursor-pointer group hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
+                    >
+                        <div class="flex items-center">
+                            <i
+                                class="sidebar-icon fas fa-box mr-6 text-lg text-gray-500 dark:text-gray-400 group-hover:text-primary-600 transition-transform duration-200"
+                            ></i>
+                            <span>Products</span>
+                        </div>
+                        <i
+                            class="fas fa-chevron-down text-xs text-gray-400 transition-transform duration-200"
+                        ></i>
+                    </div>
+                    <div class="sidebar-submenu pl-12">
+                        <a
+                            data-page="product-inventory"
+                            href="#"
+                            class="block py-2 px-4 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300"
+                            >Inventory</a
+                        >
+                        <a
+                            data-page="product-categories"
+                            href="#"
+                            class="block py-2 px-4 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300"
+                            >Categories</a
+                        >
+                        <a
+                            data-page="product-discounts"
+                            href="#"
+                            class="block py-2 px-4 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300"
+                            >Discounts</a
+                        >
+                    </div>
+                </div>
+
+                <a
+                    data-page="analytics"
+                    href="#"
+                    class="sidebar-item flex items-center px-3 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
+                >
+                    <i
+                        class="sidebar-icon fas fa-chart-line mr-6 text-lg text-gray-500 dark:text-gray-400"
+                    ></i>
+                    <span>Analytics</span>
+                </a>
+
+                <div class="sidebar-menu-group">
+                    <div
+                        class="sidebar-item flex items-center justify-between px-3 py-3 rounded-lg cursor-pointer group hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
+                    >
+                        <div class="flex items-center">
+                            <i
+                                class="sidebar-icon fas fa-cog mr-6 text-lg text-gray-500 dark:text-gray-400 group-hover:text-primary-600 transition-transform duration-200"
+                            ></i>
+                            <span>Settings</span>
+                        </div>
+                        <i
+                            class="fas fa-chevron-down text-xs text-gray-400 transition-transform duration-200"
+                        ></i>
+                    </div>
+                    <div class="sidebar-submenu pl-12">
+                        <a
+                            data-page="setting-general"
+                            href="#"
+                            class="block py-2 px-4 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300"
+                            >General</a
+                        >
+                        <a
+                            data-page="setting-security"
+                            href="#"
+                            class="block py-2 px-4 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300"
+                            >Security</a
+                        >
+                        <a
+                            data-page="setting-notification"
+                            href="#"
+                            class="block py-2 px-4 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300"
+                            >Notifications</a
+                        >
+                    </div>
+                </div>
+                <!-- Divider -->
+                <div
+                    class="border-t border-gray-200 dark:border-gray-700 my-4"
+                ></div>
+
+                <a
+                    data-page="help"
+                    href="#"
+                    class="sidebar-item flex items-center px-3 py-3 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700"
+                >
+                    <i
+                        class="sidebar-icon fas fa-question-circle mr-6 text-lg text-gray-500 dark:text-gray-400"
+                    ></i>
+                    <span>Help</span>
+                </a>
+                <button
+                    type="button"
+                    id="logoutBtn"
+
+                    class="menu-item flex items-center px-3 py-3 rounded-lg hover:bg-indigo-700 text-cyan-400 animate-glow"
+                >
+                    <i class="mr-6 fas fa-sign-out-alt"></i>
+                    <span class="menu-text">Logout</span>
+                </button>
+            </nav>
+        </div>
+
+        <!-- Footer -->
+        <div
+            class="fixed bottom-0 w-60 px-2 py-4 border-t border-gray-200 dark:border-gray-700"
+        >
+            <div class="flex items-center">
+                <img
+                    class="w-10 h-10 rounded-full mr-4 border-2 border-primary-500 animate-float"
+                    src="../public/dummy-user.png"
+                    alt="User profile"
+                />
+                <div class="flex-1 min-w-0">
+                    <p
+                        class="text-sm font-medium text-gray-900 dark:text-white truncate"
+                    >
+                        <span id="userName"></span>
+                    </p>
+                    <p
+                        class="text-xs text-gray-500 dark:text-gray-400 truncate"
+                    >
+                        <span id="userRole"></span>
+                    </p>
+                </div>
+                <button
+                    class="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
+                >
+                    <i class="fas fa-ellipsis-v"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+</aside>

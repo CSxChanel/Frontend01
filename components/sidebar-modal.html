@@ -1,0 +1,516 @@
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Admin Dashboard</title>
+        <!--Style tailwindcss-->
+        <link rel="stylesheet" href="../css/output.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+
+        <style>
+            .sidebar {
+                width: 280px;
+                transition: all 0.3s ease;
+                transform: translateX(0);
+            }
+            .sidebar-collapsed {
+                transform: translateX(-250px);
+                width: 30px;
+            }
+            .sidebar-item:hover .sidebar-icon {
+                transform: scale(1.1);
+                color: #3b82f6;
+            }
+            .sidebar-item.active {
+                background-color: #eff6ff;
+                border-left: 4px solid #3b82f6;
+            }
+            .sidebar-item.active .sidebar-icon {
+                color: #3b82f6;
+            }
+            .card-hover:hover {
+                transform: translateY(-5px);
+                box-shadow:
+                    0 20px 25px -5px rgba(0, 0, 0, 0.1),
+                    0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            }
+            .sidebar-submenu {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease-out;
+            }
+            .sidebar-submenu.open {
+                max-height: 500px;
+            }
+            /*.sidebar-tooltip {*/
+            /*    opacity: 0;*/
+            /*    transition: all 0.3s ease;*/
+            /*    pointer-events: none;*/
+            /*}*/
+            /*.sidebar-collapsed .sidebar-tooltip {*/
+            /*    opacity: 1;*/
+            /*    transition-delay: 0.3s;*/
+            /*}*/
+        </style>
+    </head>
+    <body
+        class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300"
+    >
+        <div class="flex h-screen overflow-hidden">
+            <!-- Static Sidebar - Enhanced Version -->
+            <div
+                class="sidebar bg-white dark:bg-gray-800 shadow-lg z-10 flex-shrink-0 border-r border-gray-200 dark:border-gray-700"
+            >
+                <!-- Sidebar Header -->
+                <div class="flex flex-col h-full">
+                    <div
+                        class="flex items-center justify-between h-16 px-6 border-b border-gray-200 dark:border-gray-700"
+                    >
+                        <div class="flex items-center space-x-2">
+                            <i
+                                class="fas fa-rocket text-2xl text-primary-600 dark:text-primary-400 animate-pulse-slow"
+                            ></i>
+                            <span
+                                class="text-xl font-bold text-gray-800 dark:text-white whitespace-nowrap"
+                                >AdminPro</span
+                            >
+                        </div>
+                        <button
+                            id="sidebar-toggle"
+                            class="p-1 rounded-md text-gray-500 dark:text-gray-400 hover:text-gray-700 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                        >
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                    </div>
+
+                    <!-- Sidebar Content -->
+                    <div class="flex-1 overflow-y-auto py-4 px-2">
+                        <!-- Main Navigation -->
+                        <nav class="space-y-1">
+                            <a
+                                href="#"
+                                class="sidebar-item active flex items-center px-4 py-3 rounded-lg group transition-all duration-200"
+                            >
+                                <i
+                                    class="sidebar-icon fas fa-tachometer-alt mr-3 text-lg text-gray-500 dark:text-gray-400 group-hover:text-primary-600 transition-transform duration-200"
+                                ></i>
+                                <span class="whitespace-nowrap">Dashboard</span>
+                            </a>
+
+                            <div class="sidebar-menu-group">
+                                <div
+                                    class="sidebar-item flex items-center justify-between px-4 py-3 rounded-lg cursor-pointer group hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
+                                >
+                                    <div class="flex items-center">
+                                        <i
+                                            class="sidebar-icon fas fa-users mr-3 text-lg text-gray-500 dark:text-gray-400 group-hover:text-primary-600 transition-transform duration-200"
+                                        ></i>
+                                        <span>Users</span>
+                                    </div>
+                                    <i
+                                        class="fas fa-chevron-down text-xs text-gray-400 transition-transform duration-200"
+                                    ></i>
+                                </div>
+                                <div class="sidebar-submenu pl-12">
+                                    <a
+                                        href="#"
+                                        class="block py-2 px-4 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300"
+                                        >All Users</a
+                                    >
+                                    <a
+                                        href="#"
+                                        class="block py-2 px-4 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300"
+                                        >Add New</a
+                                    >
+                                    <a
+                                        href="#"
+                                        class="block py-2 px-4 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300"
+                                        >Roles</a
+                                    >
+                                </div>
+                            </div>
+
+                            <div class="sidebar-menu-group">
+                                <div
+                                    class="sidebar-item flex items-center justify-between px-4 py-3 rounded-lg cursor-pointer group hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
+                                >
+                                    <div class="flex items-center">
+                                        <i
+                                            class="sidebar-icon fas fa-box mr-3 text-lg text-gray-500 dark:text-gray-400 group-hover:text-primary-600 transition-transform duration-200"
+                                        ></i>
+                                        <span>Products</span>
+                                    </div>
+                                    <i
+                                        class="fas fa-chevron-down text-xs text-gray-400 transition-transform duration-200"
+                                    ></i>
+                                </div>
+                                <div class="sidebar-submenu pl-12">
+                                    <a
+                                        href="#"
+                                        class="block py-2 px-4 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300"
+                                        >Inventory</a
+                                    >
+                                    <a
+                                        href="#"
+                                        class="block py-2 px-4 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300"
+                                        >Categories</a
+                                    >
+                                    <a
+                                        href="#"
+                                        class="block py-2 px-4 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300"
+                                        >Discounts</a
+                                    >
+                                </div>
+                            </div>
+
+                            <a
+                                href="#"
+                                class="sidebar-item flex items-center px-4 py-3 rounded-lg group hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
+                            >
+                                <i
+                                    class="sidebar-icon fas fa-chart-line mr-3 text-lg text-gray-500 dark:text-gray-400 group-hover:text-primary-600 transition-transform duration-200"
+                                ></i>
+                                <span>Analytics</span>
+                            </a>
+
+                            <a
+                                href="#"
+                                class="sidebar-item flex items-center px-4 py-3 rounded-lg group hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
+                            >
+                                <i
+                                    class="sidebar-icon fas fa-shopping-cart mr-3 text-lg text-gray-500 dark:text-gray-400 group-hover:text-primary-600 transition-transform duration-200"
+                                ></i>
+                                <span>Orders</span>
+                                <span
+                                    class="ml-auto bg-primary-500 text-white text-xs font-bold px-2 py-0.5 rounded-full"
+                                    >15</span
+                                >
+                            </a>
+
+                            <div class="sidebar-menu-group">
+                                <div
+                                    class="sidebar-item flex items-center justify-between px-4 py-3 rounded-lg cursor-pointer group hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
+                                >
+                                    <div class="flex items-center">
+                                        <i
+                                            class="sidebar-icon fas fa-cog mr-3 text-lg text-gray-500 dark:text-gray-400 group-hover:text-primary-600 transition-transform duration-200"
+                                        ></i>
+                                        <span>Settings</span>
+                                    </div>
+                                    <i
+                                        class="fas fa-chevron-down text-xs text-gray-400 transition-transform duration-200"
+                                    ></i>
+                                </div>
+                                <div class="sidebar-submenu pl-12">
+                                    <a
+                                        href="#"
+                                        class="block py-2 px-4 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300"
+                                        >General</a
+                                    >
+                                    <a
+                                        href="#"
+                                        class="block py-2 px-4 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300"
+                                        >Security</a
+                                    >
+                                    <a
+                                        href="#"
+                                        class="block py-2 px-4 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300"
+                                        >Notifications</a
+                                    >
+                                    <a
+                                        href="#"
+                                        class="block py-2 px-4 text-sm rounded-lg hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-600 dark:text-gray-300"
+                                        >Integrations</a
+                                    >
+                                </div>
+                            </div>
+                        </nav>
+
+                        <!-- Divider -->
+                        <div
+                            class="border-t border-gray-200 dark:border-gray-700 my-4"
+                        ></div>
+
+                        <!-- Secondary Navigation -->
+                        <nav class="space-y-1">
+                            <a
+                                href="#"
+                                class="sidebar-item flex items-center px-4 py-3 rounded-lg group hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
+                            >
+                                <i
+                                    class="sidebar-icon fas fa-life-ring mr-3 text-lg text-gray-500 dark:text-gray-400 group-hover:text-primary-600 transition-transform duration-200"
+                                ></i>
+                                <span>Support</span>
+                            </a>
+                            <a
+                                href="#"
+                                class="sidebar-item flex items-center px-4 py-3 rounded-lg group hover:bg-gray-100 dark:hover:bg-gray-700 transition-all duration-200"
+                            >
+                                <i
+                                    class="sidebar-icon fas fa-book mr-3 text-lg text-gray-500 dark:text-gray-400 group-hover:text-primary-600 transition-transform duration-200"
+                                ></i>
+                                <span>Documentation</span>
+                            </a>
+                            <button onclick="logout()">Logout</button>
+                        </nav>
+                    </div>
+
+                    <!-- Sidebar Footer - User Profile -->
+                    <div
+                        class="p-4 border-t border-gray-200 dark:border-gray-700"
+                    >
+                        <div class="flex items-center">
+                            <img
+                                class="w-10 h-10 rounded-full mr-3 border-2 border-primary-500 animate-float"
+                                src="https://randomuser.me/api/portraits/women/44.jpg"
+                                alt="User profile"
+                            />
+                            <div class="flex-1 min-w-0">
+                                <p
+                                    class="text-sm font-medium text-gray-900 dark:text-white truncate"
+                                >
+                                    Sarah Johnson
+                                </p>
+                                <p
+                                    class="text-xs text-gray-500 dark:text-gray-400 truncate"
+                                >
+                                    Admin
+                                </p>
+                            </div>
+                            <button
+                                class="p-1 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-500 dark:text-gray-400"
+                            >
+                                <i class="fas fa-ellipsis-v"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Collapsed Sidebar Tooltip -->
+                <!--<div-->
+                <!--    class="sidebar-tooltip bg-red-700 absolute left-full ml-2 px-2 py-1 bg-gray-900 text-white text-sm rounded-md shadow-lg whitespace-nowrap"-->
+
+                <!--    menu-->
+                <!--</div>-->
+            </div>
+
+            <!-- Main Content Area -->
+            <div class="flex-1 flex flex-col overflow-hidden">
+                <!-- Top Navigation -->
+                <header
+                    class="flex items-center justify-between h-16 px-4 border-b border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 transition-colors duration-300"
+                >
+                    <!-- Mobile menu button -->
+                    <button
+                        id="mobile-menu-button"
+                        class="md:hidden p-2 rounded-md text-gray-500 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500"
+                    >
+                        <i class="fas fa-bars"></i>
+                    </button>
+
+                    <!-- Search bar -->
+                    <div class="flex-1 max-w-md mx-4">
+                        <div class="relative">
+                            <div
+                                class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                            >
+                                <i class="fas fa-search text-gray-400"></i>
+                            </div>
+                            <input
+                                class="block w-full pl-10 pr-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-gray-50 dark:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-colors duration-200"
+                                placeholder="Search..."
+                            />
+                        </div>
+                    </div>
+
+                    <!-- Right side buttons -->
+                    <div class="flex items-center space-x-4">
+                        <button
+                            class="p-2 rounded-full text-gray-500 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200 relative"
+                        >
+                            <i class="fas fa-bell"></i>
+                            <span
+                                class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500 animate-ping"
+                            ></span>
+                            <span
+                                class="absolute top-0 right-0 h-2 w-2 rounded-full bg-red-500"
+                            ></span>
+                        </button>
+                        <button
+                            class="p-2 rounded-full text-gray-500 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                        >
+                            <i class="fas fa-envelope"></i>
+                        </button>
+                        <button
+                            id="theme-toggle"
+                            class="p-2 rounded-full text-gray-500 dark:text-gray-300 hover:text-gray-600 dark:hover:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors duration-200"
+                        >
+                            <i class="fas fa-moon dark:hidden"></i>
+                            <i class="fas fa-sun hidden dark:inline"></i>
+                        </button>
+                    </div>
+                </header>
+
+                <!-- Main Content -->
+                <main
+                    class="flex-1 overflow-y-auto p-4 bg-gray-50 dark:bg-gray-900 transition-colors duration-300"
+                >
+                    <div class="mb-6 flex justify-between items-center">
+                        <h1
+                            class="text-2xl font-bold text-gray-800 dark:text-white"
+                        >
+                            Dashboard Overview
+                        </h1>
+                        <button
+                            class="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 flex items-center"
+                        >
+                            <i class="fas fa-plus mr-2"></i> New Report
+                        </button>
+                    </div>
+
+                    <!-- Stats Cards -->
+                    <div
+                        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6"
+                    >
+                        <!-- [Same cards content as before] -->
+                        <div
+                            class="bg-gradient-to-r from-blue-500 to-blue-400 rounded-xl shadow-lg p-6 text-white card-hover transition-all duration-300"
+                        >
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-sm font-medium">
+                                        Total Revenue
+                                    </p>
+                                    <h3 class="text-2xl font-bold mt-1">
+                                        $24,780
+                                    </h3>
+                                    <p class="text-xs mt-2 opacity-90">
+                                        +12.5% from last month
+                                    </p>
+                                </div>
+                                <i
+                                    class="fas fa-dollar-sign text-2xl opacity-70 animate-bounce-slow"
+                                ></i>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-gradient-to-r from-purple-500 to-purple-400 rounded-xl shadow-lg p-6 text-white card-hover transition-all duration-300"
+                        >
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-sm font-medium">New Users</p>
+                                    <h3 class="text-2xl font-bold mt-1">
+                                        1,254
+                                    </h3>
+                                    <p class="text-xs mt-2 opacity-90">
+                                        +8.2% from last month
+                                    </p>
+                                </div>
+                                <i
+                                    class="fas fa-users text-2xl opacity-70 animate-float"
+                                ></i>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-gradient-to-r from-green-500 to-green-400 rounded-xl shadow-lg p-6 text-white card-hover transition-all duration-300"
+                        >
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-sm font-medium">
+                                        Total Orders
+                                    </p>
+                                    <h3 class="text-2xl font-bold mt-1">
+                                        3,487
+                                    </h3>
+                                    <p class="text-xs mt-2 opacity-90">
+                                        +5.7% from last month
+                                    </p>
+                                </div>
+                                <i
+                                    class="fas fa-shopping-cart text-2xl opacity-70 animate-spin-slow"
+                                ></i>
+                            </div>
+                        </div>
+                        <div
+                            class="bg-gradient-to-r from-pink-500 to-pink-400 rounded-xl shadow-lg p-6 text-white card-hover transition-all duration-300"
+                        >
+                            <div class="flex justify-between items-start">
+                                <div>
+                                    <p class="text-sm font-medium">
+                                        Pending Tasks
+                                    </p>
+                                    <h3 class="text-2xl font-bold mt-1">18</h3>
+                                    <p class="text-xs mt-2 opacity-90">
+                                        -3 from yesterday
+                                    </p>
+                                </div>
+                                <i
+                                    class="fas fa-tasks text-2xl opacity-70 animate-pulse-slow"
+                                ></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- [Rest of the main content remains the same as previous example] -->
+                    <!-- ... -->
+                </main>
+            </div>
+        </div>
+
+        <script>
+            // Dark mode toggle
+            const themeToggle = document.getElementById("theme-toggle");
+            const html = document.documentElement;
+
+            themeToggle.addEventListener("click", () => {
+                html.classList.toggle("dark");
+
+                // Save preference to localStorage
+                if (html.classList.contains("dark")) {
+                    localStorage.setItem("theme", "dark");
+                } else {
+                    localStorage.setItem("theme", "light");
+                }
+            });
+
+            // Check for saved theme preference
+            if (
+                localStorage.getItem("theme") === "dark" ||
+                (!localStorage.getItem("theme") &&
+                    window.matchMedia("(prefers-color-scheme: dark)").matches)
+            ) {
+                html.classList.add("dark");
+            } else {
+                html.classList.remove("dark");
+            }
+
+            // Sidebar toggle functionality
+            const sidebar = document.querySelector(".sidebar");
+            const mobileMenuButton =
+                document.getElementById("mobile-menu-button");
+
+            mobileMenuButton.addEventListener("click", () => {
+                sidebar.classList.toggle("hidden");
+                sidebar.classList.toggle("sidebar-collapsed");
+            });
+
+            // Submenu toggle functionality
+            document.querySelectorAll(".sidebar-menu-group").forEach(group => {
+                const trigger = group.querySelector(".sidebar-item");
+                const submenu = group.querySelector(".sidebar-submenu");
+                const chevron = group.querySelector(".fa-chevron-down");
+
+                trigger.addEventListener("click", () => {
+                    submenu.classList.toggle("open");
+                    chevron.classList.toggle("rotate-180");
+                });
+            });
+
+
+        </script>
+    </body>
+</html>

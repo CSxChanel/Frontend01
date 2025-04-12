@@ -1,0 +1,49 @@
+<!--pages/fashboard.html-->
+
+<!doctype html>
+<html lang="id">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta name="theme-color" content="#6d8eff" />
+        <title>cPhone - Dashboard</title>
+
+        <meta
+            name="description"
+            content="Latihan CRUD Frontend HTML, css dan JavaScript."
+        />
+        <link rel="stylesheet" href="./css/style.dashboard.css" />
+        <link rel="stylesheet" href="./css/output.css" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700&family=Rajdhani:wght@300;400;500;600&display=swap"
+            rel="stylesheet"
+        />
+        <link
+            rel="stylesheet"
+            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        />
+        <!--<script type="module" src="../auth/auth-index.js"></script>-->
+        
+    </head>
+    <body
+        class="bg-gray-50 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors duration-300"
+    >
+        <div id="loading-spinner" class="bg-white p-4 rounded-lg shadow-lg">
+            <i class="fas fa-spinner fa-spin text-3xl text-purple-600"></i>
+        </div>
+        <div class="flex h-screen overflow-hidden">
+            <div id="sidebar"></div>
+            <!-- ===== Main Content ===== -->
+            <div class="flex-1 flex flex-col overflow-hidden">
+                <div id="header"></div>
+                <!-- Main Content -->
+                <main
+                    id="main-content"
+                    class="z-20 flex-1 overflow-y-auto p-4 bg-gray-100 dark:bg-gray-900 transition-colors duration-300"
+                ></main>
+            </div>
+        </div>
+        
+        <script type="module" src="./routers/router.js"></script>
+    </body>
+</html>

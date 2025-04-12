@@ -1,0 +1,90 @@
+<!--setting-general-->
+<div class="bg-white rounded-lg shadow overflow-hidden mb-6">
+    <div class="p-6 border-b border-gray-200">
+        <h2 class="text-lg font-semibold text-gray-800">Account Settings</h2>
+    </div>
+    <div class="p-6">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="md:col-span-2">
+                <h3 class="text-lg font-medium text-gray-900 mb-4">
+                    Profile Information
+                </h3>
+                <form>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+                        <div>
+                            <label
+                                class="block text-sm font-medium text-gray-700 mb-1"
+                                >First Name</label
+                            >
+                            <input
+                                type="text"
+                                class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                value="Sarah"
+                            />
+                        </div>
+                        <div>
+                            <label
+                                class="block text-sm font-medium text-gray-700 mb-1"
+                                >Last Name</label
+                            >
+                            <input
+                                type="text"
+                                class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                                value="Johnson"
+                            />
+                        </div>
+                    </div>
+                    <div class="mb-4">
+                        <label
+                            class="block text-sm font-medium text-gray-700 mb-1"
+                            >Email</label
+                        >
+                        <input
+                            type="email"
+                            class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                            value="sarah@example.com"
+                        />
+                    </div>
+                    <div class="mb-4">
+                        <label
+                            class="block text-sm font-medium text-gray-700 mb-1"
+                            >Timezone</label
+                        >
+                        <select
+                            class="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-purple-600 focus:border-transparent"
+                        >
+                            <option>(UTC-08:00) Pacific Time</option>
+                            <option>(UTC-05:00) Eastern Time</option>
+                        </select>
+                    </div>
+                    <button
+                        type="submit"
+                        class="px-4 py-2 bg-purple-600 text-white rounded-md hover:bg-purple-700"
+                    >
+                        Update Profile
+                    </button>
+                </form>
+            </div>
+            <div>
+                <h3 class="text-lg font-medium text-gray-900 mb-4">
+                    Profile Photo
+                </h3>
+                <div class="flex flex-col items-center">
+                    <img
+                        src="https://randomuser.me/api/portraits/women/44.jpg"
+                        class="w-32 h-32 rounded-full mb-4"
+                        alt="Profile"
+                    />
+                    <button
+                        class="px-4 py-2 bg-white border border-gray-300 rounded-md text-gray-700 hover:bg-gray-50 mb-2"
+                    >
+                        Change Photo
+                    </button>
+                    <button class="text-sm text-red-600 hover:text-red-800">
+                        Remove Photo
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
