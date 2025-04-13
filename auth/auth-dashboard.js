@@ -20,7 +20,7 @@ function logout() {
     });
 
     removeAccessToken();
-    window.location.href = "../index.html";
+    window.location.href = "index.html";
 }
 
 // Setelah halaman siap, ambil data user dan pasang listener logout
@@ -37,10 +37,10 @@ document.addEventListener("DOMContentLoaded", async () => {
             userEmail.textContent = data.data.email;
         } else {
             alert("Gagal memuat data user, silakan login ulang.");
-            window.location.href = "../index.html";
+            window.location.href = "index.html";
         }
     } catch (err) {
         console.error("Gagal ambil data user:", err);
-        window.location.href = "..index.html";
+        window.location.href = "index.html";
     }
 });
