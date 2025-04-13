@@ -1,5 +1,5 @@
 // api/api.js
-import { API_URL } from "config.js";
+import { API_URL } from "./config.js";
 
 // UNTUK REGISTRASI
 export async function registerUser(data) {
