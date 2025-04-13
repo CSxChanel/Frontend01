@@ -12,7 +12,11 @@ const loadComponent = async (id, file) => {
 // import
 
 // Panggil sidebar dan header, authDashboardInit
+// Load Sidebar
 await loadComponent("sidebar", "../layouts/sidebar.html");
+const mod = await import("../auth/auth-dashboard.js");
+await mod.authDashboardInit();
+// Load Header
 await loadComponent("header", "../layouts/header.html");
 
 
@@ -102,6 +106,7 @@ const getPage = () =>
 // Fungsi untuk memuat konten berdasarkan page
 const loadPage = async (page, push = true) => {
     const spinner = document.getElementById("loading-spinner");
+     spinner.style.display = "block";
     
 
     const file = allowedPages.includes(page)
@@ -124,12 +129,12 @@ const loadPage = async (page, push = true) => {
             titleEl.textContent = page.charAt(0).toUpperCase() + page.slice(1);
 
         // ========== fungsi disini ============
-        spinner.style.display = "block";
+       
         // fungsi cek login / token 
         if (page === "dashboard") {
             const mod = await import("../auth/auth-dashboard.js");
-            await mod.authDashboardInit();
-            window.logoutBtn = () => mod.logoutBtn();
+            
+            
 }
         // fungsi login
         if (page === "login") {
