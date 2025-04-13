@@ -6,7 +6,7 @@ import { API_URL } from "../api/config.js";
 // Cek apakah user sudah login
 const token = getAccessToken();
 if (!token || token === "undefined") {
-    window.location.href = "..index.html";
+    window.location.href = "../index.html";
 }
 
 // Fungsi logout & hapus token
