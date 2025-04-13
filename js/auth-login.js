@@ -19,7 +19,8 @@ form.addEventListener("submit", async e => {
         form.reset();
         // redirect ke dashboard
         setTimeout(() => {
-            window.location.href = "/Frontend01/pages/dashboard";
+            window.location.href = "/Frontend01/pages/dashboard.html?page=dashboard";
+
         }, 1000);
     } else {
         alert(res.message || "Login gagal.");
