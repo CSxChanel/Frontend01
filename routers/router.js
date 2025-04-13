@@ -9,9 +9,11 @@ const loadComponent = async (id, file) => {
     if (id === "sidebar") initSidebar();
     if (id === "header") initHeader();
 };
-
-// Panggil sidebar dan header
+// import
+import { authDashboardInit } from "../auth/auth-dashboard.js";
+// Panggil sidebar dan header, authDashboardInit
 await loadComponent("sidebar", "../layouts/sidebar.html");
+await authDashboardInit(); 
 await loadComponent("header", "../layouts/header.html");
 
 // Inisialisasi tombol toggle dari header (untuk responsive mobile)
