@@ -12,30 +12,30 @@
     <div class="space-y-4 text-gray-700">
       <div>
         <p class="font-semibold">👤 Username:</p>
-        <p id="username"></p>
+        <p id="userName"></p>
       </div>
       <div>
         <p class="font-semibold">📧 Email:</p>
-        <p id="email"></p>
+        <p id="userEmail"></p>
       </div>
       <div>
         <p class="font-semibold">📱 Perangkat:</p>
-        <p id="device"></p>
+        <p id="userDevices"></p>
       </div>
       <div>
         <p class="font-semibold">🌐 Browser:</p>
-        <p id="browser"></p>
+        <p id="userBrowser"></p>
       </div>
       <div>
         <p class="font-semibold">💻 Sistem Operasi:</p>
-        <p id="os"></p>
+        <p id="userOs"></p>
       </div>
     </div>
   </div>
 
   <script>
     async function getProfile() {
-      const res = await fetch("http://localhost:3000/profile", {
+      const res = await fetch("https://backend-v01.up.railway.app/api/user/profile", {
         headers: {
           Authorization: "Bearer YOUR_JWT_TOKEN"
         }
