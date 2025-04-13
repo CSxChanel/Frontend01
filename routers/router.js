@@ -123,9 +123,9 @@ const loadPage = async (page, push = true) => {
         // ========== fungsi disini ============
 
         // fungsi cek login / token 
-        // if (page === "dashboard") {
-        //     import("../auth/auth-dashboard.js");
-        // }
+        if (page === "dashboard") {
+            import("../auth/auth-dashboard.js");
+        }
         // fungsi login
         if (page === "login") {
             import("../js/auth-form-login.js").then(mod => {
