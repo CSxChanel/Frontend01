@@ -4,9 +4,7 @@ import { removeAccessToken, getAccessToken } from "../utils/token.js";
 import { API_URL } from "../api/config.js";
 
 export async function authDashboardInit() {
-    document.querySelectorAll("#userName").forEach(el => el.textContent = `${username}`);
-    document.querySelectorAll("#userEmail").forEach(el => el.textContent = email);
-
+    
     // Cek apakah user sudah login
     const token = getAccessToken();
     if (!token || token === "undefined") {
@@ -50,9 +48,12 @@ export async function authDashboardInit() {
 
         const res = await fetchWithAuth(`${API_URL}/user/profile`);
         if (res.success) {
-            const { username, email } = res.data;
+            const { username, email, role } = res.data;
             userNameEl.textContent = `Halo, ${username}`;
             userEmailEl.textContent = email;
+            document.querySelectorAll("#userName").forEach(el => el.textContent = `${username}`);
+            document.querySelectorAll("#userEmail").forEach(el => el.textContent = email);
+             document.querySelectorAll("#userRole").forEach(el => el.textContent = role);
         } else {
             alert("Gagal memuat data user.");
             window.location.href = "../index.html";
