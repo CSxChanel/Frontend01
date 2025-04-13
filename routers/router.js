@@ -11,8 +11,8 @@ const loadComponent = async (id, file) => {
 };
 
 // Panggil sidebar dan header
-await loadComponent("sidebar", "./layouts/sidebar.html");
-await loadComponent("header", "./layouts/header.html");
+await loadComponent("sidebar", "../layouts/sidebar.html");
+await loadComponent("header", "../layouts/header.html");
 
 // Inisialisasi tombol toggle dari header (untuk responsive mobile)
 function initHeader() {
@@ -102,8 +102,8 @@ const loadPage = async (page, push = true) => {
     spinner.style.display = "block";
 
     const file = allowedPages.includes(page)
-        ? `./contents/${page}.html`
-        : "./contents/404.html";
+        ? `../contents/${page}.html`
+        : "../contents/404.html";
 
     try {
         const res = await fetch(file);
