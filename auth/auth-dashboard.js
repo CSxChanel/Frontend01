@@ -47,17 +47,25 @@ export async function authDashboardInit() {
         logoutBtn.addEventListener("click", logout);
 
         const res = await fetchWithAuth(`${API_URL}/user/profile`);
-        if (res.success) {
-            const { username, email, role } = res.data;
-            userNameEl.textContent = `Halo, ${username}`;
-            userEmailEl.textContent = email;
-            document.querySelectorAll("#userName").forEach(el => el.textContent = `${username}`);
-            document.querySelectorAll("#userEmail").forEach(el => el.textContent = email);
-             document.querySelectorAll("#userRole").forEach(el => el.textContent = role);
-        } else {
-            alert("Gagal memuat data user.");
-            window.location.href = "../index.html";
-        }
+        const res = await fetchWithAuth(`${API_URL}/user/profile`);
+
+        function renderUserProfile({ username, email, role }) {
+    document.querySelectorAll("#userName").forEach(el => el.textContent = username);
+    document.querySelectorAll("#userEmail").forEach(el => el.textContent = email);
+    document.querySelectorAll("#userRole").forEach(el => el.textContent = role);
+
+    // Opsional: jika kamu punya satu elemen greeting:
+    const greeting = document.getElementById("userGreeting");
+    if (greeting) greeting.textContent = `Halo, ${username}`;
+}
+
+if (res.success) {
+    renderUserProfile(res.data);
+} else {
+    alert("Gagal memuat data user.");
+    window.location.href = "../index.html";
+}
+
     } catch (err) {
         console.error("Gagal memuat data user:", err);
         window.location.href = "../index.html";
