@@ -9,17 +9,10 @@ const loadComponent = async (id, file) => {
     if (id === "sidebar") initSidebar();
     if (id === "header") initHeader();
 };
-// import
 
-// Panggil sidebar dan header, authDashboardInit
-// Load Sidebar
+// Load Sidebar dan Header
 await loadComponent("sidebar", "../layouts/sidebar.html");
-const mod = await import("../auth/auth-dashboard.js");
-await mod.authDashboardInit();
-// Load Header
 await loadComponent("header", "../layouts/header.html");
-
-
 
 // Inisialisasi tombol toggle dari header (untuk responsive mobile)
 function initHeader() {
@@ -30,6 +23,7 @@ function initHeader() {
             sidebar.classList.toggle("hidden");
         });
     }
+
     // Dark mode toggle
     const themeToggle = document.getElementById("theme-toggle");
     const html = document.documentElement;
@@ -37,7 +31,7 @@ function initHeader() {
     themeToggle.addEventListener("click", () => {
         html.classList.toggle("dark");
 
-        // Save preference to localStorage
+        // Simpan preferensi ke localStorage
         if (html.classList.contains("dark")) {
             localStorage.setItem("theme", "dark");
         } else {
@@ -45,7 +39,7 @@ function initHeader() {
         }
     });
 
-    // Check for saved theme preference
+    // Cek preferensi tema
     if (
         localStorage.getItem("theme") === "dark" ||
         (!localStorage.getItem("theme") &&
@@ -75,7 +69,7 @@ function initSidebar() {
     });
 }
 
-// Halaman yang diizinkan untuk dirender
+// Daftar halaman yang diperbolehkan
 const allowedPages = [
     "dashboard",
     // users
@@ -99,15 +93,14 @@ const allowedPages = [
     "login"
 ];
 
-// Ambil parameter dari URL (?page=)
+// Ambil parameter ?page= dari URL
 const getPage = () =>
     new URLSearchParams(window.location.search).get("page") || "dashboard";
 
-// Fungsi untuk memuat konten berdasarkan page
+// Fungsi utama untuk memuat konten halaman
 const loadPage = async (page, push = true) => {
     const spinner = document.getElementById("loading-spinner");
-     spinner.style.display = "block";
-    
+    spinner.style.display = "block";
 
     const file = allowedPages.includes(page)
         ? `../contents/${page}.html`
@@ -119,33 +112,27 @@ const loadPage = async (page, push = true) => {
         document.getElementById("main-content").innerHTML = html;
 
         if (push) history.pushState({ page }, "", `?page=${page}`);
-        document.title = `cPhone - ${
-            page.charAt(0).toUpperCase() + page.slice(1)
-        }`;
+        document.title = `cPhone - ${page.charAt(0).toUpperCase() + page.slice(1)}`;
         updateActiveMenu(page);
 
         const titleEl = document.getElementById("page-title");
         if (titleEl)
             titleEl.textContent = page.charAt(0).toUpperCase() + page.slice(1);
 
-        // ========== fungsi disini ============
-       
-        // fungsi cek login / token 
+        // FUNGSI KHUSUS BERDASARKAN PAGE
         if (page === "dashboard") {
             const mod = await import("../auth/auth-dashboard.js");
             await mod.authDashboardInit();
-            
-}
-        // fungsi login
+            window.logoutBtn = () => mod.logoutBtn?.(); // optional chaining
+        }
+
         if (page === "login") {
             import("../js/auth-form-login.js").then(mod => {
                 mod.setupLoginForm();
-                // togglePassword dari onclick di ligin.html
                 window.togglePassword = () => mod.togglePassword();
             });
         }
 
-        // =========== fungsi lainnya ================
     } catch (err) {
         console.error("Error loading page:", err);
     } finally {
@@ -163,12 +150,12 @@ const updateActiveMenu = page => {
     });
 };
 
-// Tangani tombol back / forward browser
+// Tangani navigasi back/forward dari browser
 window.addEventListener("popstate", e => {
     if (e.state?.page) loadPage(e.state.page, false);
 });
 
-// Delegasi klik menu
+// Delegasi klik menu sidebar
 document.addEventListener("click", e => {
     const target = e.target.closest("[data-page]");
     if (target) {
@@ -178,5 +165,5 @@ document.addEventListener("click", e => {
     }
 });
 
-// Muat halaman awal
+// Load halaman saat pertama kali
 loadPage(getPage());
