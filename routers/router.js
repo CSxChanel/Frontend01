@@ -133,7 +133,7 @@ const loadPage = async (page, push = true) => {
         // fungsi cek login / token 
         if (page === "dashboard") {
             const mod = await import("../auth/auth-dashboard.js");
-            
+            await mod.authDashboardInit();
             
 }
         // fungsi login
