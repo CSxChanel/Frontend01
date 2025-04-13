@@ -15,7 +15,7 @@ import { authDashboardInit } from "../auth/auth-dashboard.js";
 await loadComponent("sidebar", "../layouts/sidebar.html");
 await loadComponent("header", "../layouts/header.html");
 
-await authDashboardInit(); 
+
 
 // Inisialisasi tombol toggle dari header (untuk responsive mobile)
 function initHeader() {
@@ -127,8 +127,9 @@ const loadPage = async (page, push = true) => {
 
         // fungsi cek login / token 
         if (page === "dashboard") {
-            import("../auth/auth-dashboard.js");
-        }
+            const mod = await import("../auth/auth-dashboard.js");
+            await mod.authDashboardInit();
+}
         // fungsi login
         if (page === "login") {
             import("../js/auth-form-login.js").then(mod => {
