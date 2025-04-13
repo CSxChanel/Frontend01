@@ -129,7 +129,7 @@ const loadPage = async (page, push = true) => {
         if (page === "dashboard") {
             const mod = await import("../auth/auth-dashboard.js");
             await mod.authDashboardInit();
-            window.logoutBtn = () mod.logoutBtn();
+            window.logoutBtn = () => mod.logoutBtn();
 }
         // fungsi login
         if (page === "login") {
