@@ -10,19 +10,19 @@ form.addEventListener("submit", async e => {
     const username = form.username.value;
     const email = form.email.value;
     const password = form.password.value;
-    const confirmPassword = form.confirmPassword.value;
+    // const confirmPassword = form.confirmPassword.value;
 
-    if (password !== confirmPassword) {
-        message.textContent = "Confirmasi password tidak sama!";
-        message.style.color = "red";
-        return;
-    }
+    // if (password !== confirmPassword) {
+    //     message.textContent = "Confirmasi password tidak sama!";
+    //     message.style.color = "red";
+    //     return;
+    // }
 
     const result = await registerUser({
         username,
         email,
         password,
-        confirmPassword
+        // confirmPassword
     });
 
     if (result.success) {
