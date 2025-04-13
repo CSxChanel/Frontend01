@@ -13,8 +13,9 @@ const loadComponent = async (id, file) => {
 import { authDashboardInit } from "../auth/auth-dashboard.js";
 // Panggil sidebar dan header, authDashboardInit
 await loadComponent("sidebar", "../layouts/sidebar.html");
-await authDashboardInit(); 
 await loadComponent("header", "../layouts/header.html");
+
+await authDashboardInit(); 
 
 // Inisialisasi tombol toggle dari header (untuk responsive mobile)
 function initHeader() {
