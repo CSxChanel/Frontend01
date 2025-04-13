@@ -10,7 +10,7 @@ const loadComponent = async (id, file) => {
     if (id === "header") initHeader();
 };
 // import
-import { authDashboardInit } from "../auth/auth-dashboard.js";
+
 // Panggil sidebar dan header, authDashboardInit
 await loadComponent("sidebar", "../layouts/sidebar.html");
 await loadComponent("header", "../layouts/header.html");
